@@ -97,22 +97,24 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  cors: [
-    'https://checkout.stripe.com',
-    process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-    'https://your-app.vercel.app',
-    'https://www.your-domain.com',
-    'http://localhost:3000',
-    'http://localhost:3001',
-  ].filter(Boolean),
-  csrf: [
-    'https://checkout.stripe.com',
-    process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-    'https://your-app.vercel.app',
-    'https://www.your-domain.com',
-    'http://localhost:3000',
-    'http://localhost:3001',
-  ].filter(Boolean),
+  security: {
+    cors: [
+      'https://checkout.stripe.com',
+      process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
+      'https://your-app.vercel.app',
+      'https://www.your-domain.com',
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ].filter(Boolean),
+    csrf: [
+      'https://checkout.stripe.com',
+      process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
+      'https://your-app.vercel.app',
+      'https://www.your-domain.com',
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ].filter(Boolean),
+  },
   endpoints: [
     {
       path: '/create-payment-intent',
