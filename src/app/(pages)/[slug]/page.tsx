@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 
-import { Category } from '../../../payload/payload-types'
 import type { Page } from '../../../payload/payload-types'
+import { Category } from '../../../payload/payload-types'
 import { staticHome } from '../../../payload/seed/home-static'
 import { fetchDoc } from '../../_api/fetchDoc'
 import { fetchDocs } from '../../_api/fetchDocs'
@@ -22,8 +22,8 @@ import { generateMeta } from '../../_utilities/generateMeta'
 export const dynamic = 'force-dynamic'
 
 import Categories from '../../_components/Categories'
-import Promotion from '../../_components/Promotion'
 import { CarouselHero } from '../../_components/Hero/CarouselHero'
+import Promotion from '../../_components/Promotion'
 
 import classes from './index.module.scss'
 
