@@ -42,21 +42,19 @@ dotenv.config({
 
 export default buildConfig({
   db: mongooseAdapter({
-    url: process.env.MONGODB_URI || process.env.DATABASE_URI,
+    url: process.env.DATABASE_URI || process.env.MONGODB_URI,
   }),
   cors: [
     'https://checkout.stripe.com',
     process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-    'https://your-app.vercel.app',
-    'https://www.your-domain.com',
+    process.env.NEXT_PUBLIC_SERVER_URL || '',
     'http://localhost:3000',
     'http://localhost:3001',
   ].filter(Boolean),
   csrf: [
     'https://checkout.stripe.com',
     process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-    'https://your-app.vercel.app',
-    'https://www.your-domain.com',
+    process.env.NEXT_PUBLIC_SERVER_URL || '',
     'http://localhost:3000',
     'http://localhost:3001',
   ].filter(Boolean),
@@ -95,11 +93,6 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}), // editor-config
-  // database-adapter-config-start
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI,
-  }),
-  // database-adapter-config-end
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
   collections: [Pages, Products, Orders, Media, Categories, Users],
   globals: [Settings, Header, Footer],
