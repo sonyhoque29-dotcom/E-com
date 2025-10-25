@@ -3,9 +3,19 @@ import next from 'next'
 import nextBuild from 'next/dist/build'
 import path from 'path'
 
+// Load environment variables
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
+
+// Ensure critical environment variables are available
+if (!process.env.MONGODB_URI) {
+  throw new Error('MONGODB_URI environment variable is required')
+}
+
+if (!process.env.PAYLOAD_SECRET) {
+  throw new Error('PAYLOAD_SECRET environment variable is required')
+}
 
 import express from 'express'
 import payload from 'payload'

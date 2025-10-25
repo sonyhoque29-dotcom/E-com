@@ -40,7 +40,15 @@ dotenv.config({
   path: path.resolve(__dirname, '../../.env'),
 })
 
+// Ensure MongoDB URI is available
+if (!process.env.MONGODB_URI) {
+  throw new Error('MONGODB_URI environment variable is required')
+}
+
 export default buildConfig({
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI,
+  }),
   cors: [
     'https://checkout.stripe.com',
     process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
