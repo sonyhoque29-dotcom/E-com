@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: ecommerce-cms
+    env: node
+    region: frankfurt  # Choose your preferred region
+    buildCommand: yarn install && yarn build
+    startCommand: yarn serve
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false  # This will be set manually in Render dashboard
+      - key: PAYLOAD_SECRET
+        sync: false  # This will be set manually in Render dashboard
+      - key: STRIPE_SECRET_KEY
+        sync: false  # This will be set manually in Render dashboard
+      - key: NEXT_PRIVATE_DRAFT_SECRET
+        sync: false  # This will be set manually in Render dashboard
+      - key: NEXT_PRIVATE_REVALIDATION_KEY
+        sync: false  # This will be set manually in Render dashboard
+      - key: PAYLOAD_PUBLIC_SERVER_URL
+        value: https://ecommerce-cms.onrender.com  # Update this with your actual Render URL
+    healthCheckPath: /api/_health
+    autoDeploy: true
