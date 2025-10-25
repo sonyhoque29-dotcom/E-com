@@ -11,7 +11,6 @@ import { slateEditor } from '@payloadcms/richtext-slate' // editor-import
 import dotenv from 'dotenv'
 import path from 'path'
 import { buildConfig } from 'payload/config'
-import { corsOptions } from './cors'
 
 import Categories from './collections/Categories'
 import { Media } from './collections/Media'
@@ -42,11 +41,21 @@ dotenv.config({
 })
 
 export default buildConfig({
-  cors: corsOptions,
-  csrf: [
+  cors: [
+    'https://checkout.stripe.com',
+    process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
     'https://your-app.vercel.app',
     'https://www.your-domain.com',
-    process.env.NEXT_PUBLIC_SERVER_URL,
+    'http://localhost:3000',
+    'http://localhost:3001',
+  ].filter(Boolean),
+  csrf: [
+    'https://checkout.stripe.com',
+    process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
+    'https://your-app.vercel.app',
+    'https://www.your-domain.com',
+    'http://localhost:3000',
+    'http://localhost:3001',
   ].filter(Boolean),
   admin: {
     user: Users.slug,
@@ -97,24 +106,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  security: {
-    cors: [
-      'https://checkout.stripe.com',
-      process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-      'https://your-app.vercel.app',
-      'https://www.your-domain.com',
-      'http://localhost:3000',
-      'http://localhost:3001',
-    ].filter(Boolean),
-    csrf: [
-      'https://checkout.stripe.com',
-      process.env.PAYLOAD_PUBLIC_SERVER_URL || '',
-      'https://your-app.vercel.app',
-      'https://www.your-domain.com',
-      'http://localhost:3000',
-      'http://localhost:3001',
-    ].filter(Boolean),
-  },
+
   endpoints: [
     {
       path: '/create-payment-intent',
